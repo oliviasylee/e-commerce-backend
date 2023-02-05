@@ -3,18 +3,17 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// GET all products
-// find all products
+// GET(find) all products
 // be sure to include its associated Category and Tag data
 router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      // 태그 DB의 태그_네임 밑에 ProductTag가 또 종속되어야하는데 
+      // should be ProductTag under Tag- Tag_name 
       // Nested eager loading to load all related models of a related model
       include: [
         { model: Category }, 
         { model: Tag, 
-          include: { model: ProductTag },
+          include: [{ model: ProductTag }],
         }],
     });
     res.status(200).json(productData);
@@ -23,8 +22,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one product
-// find a single product by its `id`
+// GET(find) one product by its `id`
 // be sure to include its associated Category and Tag data
 router.get('/:id', async (req, res) => {
   try{
@@ -32,16 +30,16 @@ router.get('/:id', async (req, res) => {
       include: [
         { model: Category }, 
         { model: Tag, 
-          include: { model: ProductTag },
+          include: [{ model: ProductTag }],
         }],
     });
-    res.status(200).json(productData)
+    res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// create new product
+// POST(create) new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -73,7 +71,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// PUT(update) product
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -115,7 +113,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// delete one product by its `id` value
+// DELETE one product by its `id` value
 router.delete('/:id', async (req, res) => {
   try {
     const productData = await Product.destroy({
