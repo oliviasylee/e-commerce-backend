@@ -12,9 +12,10 @@ router.get('/', async (req, res) => {
       // Nested eager loading to load all related models of a related model
       include: [
         { model: Category }, 
-        { model: Tag, 
-          include: [{ model: ProductTag }],
-        }],
+        { model: Tag }],
+        // { model: Tag, 
+        //   include: [{ model: ProductTag }],
+        // }],
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -26,12 +27,11 @@ router.get('/', async (req, res) => {
 // be sure to include its associated Category and Tag data
 router.get('/:id', async (req, res) => {
   try{
-    const productData = await Product.findByPk(req.param.id, {
+    const productData = await Product.findByPk(req.params.id, {
       include: [
         { model: Category }, 
-        { model: Tag, 
-          include: [{ model: ProductTag }],
-        }],
+        { model: Tag },
+      ],
     });
     res.status(200).json(productData);
   } catch (err) {
