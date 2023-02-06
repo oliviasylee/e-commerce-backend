@@ -1,6 +1,6 @@
 # E-commerce Back End
-The e-commerce website's backend is created using Express.js API and Sequelize to connect with a MySQL database. Designed to manage data related to categories, products, and tags, it can be read, created, updated, and deleted. As this is a backend-only application, Insomnia was used to send requests to the APIs.
 ## Description
+The e-commerce website's backend is created using Express.js API and Sequelize to connect with a MySQL database. Designed to manage data related to categories, products, and tags, it can be read, created, updated, and deleted. As this is a backend-only application, Insomnia was used to send requests to the APIs.
 
 ## Table of Contents
 - [Description](#Description)
