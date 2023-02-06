@@ -33,7 +33,7 @@ mysql -u root -p
 source schema.sql
 ```
 
-4. Run the following code in your terminal:
+4. Run the application in your terminal:
 ```
 node server.js
 ```
